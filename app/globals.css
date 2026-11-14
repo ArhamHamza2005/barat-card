@@ -1,0 +1,342 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  color-scheme: light;
+  --background: #fff8ed;
+  --foreground: #3b0718;
+  --card: #fff8ed;
+  --card-foreground: #3b0718;
+  --popover: #fff8ed;
+  --popover-foreground: #3b0718;
+  --primary: #570d22;
+  --primary-foreground: #fff8ed;
+  --secondary: #e8d5b7;
+  --secondary-foreground: #3b0718;
+  --muted: #e8d5b7;
+  --muted-foreground: #705a4b;
+  --accent: #c6a36b;
+  --accent-foreground: #3b0718;
+  --destructive: #a3313d;
+  --border: #d8c39e;
+  --input: #d8c39e;
+  --ring: #c6a36b;
+  --radius: 0.625rem;
+  --sidebar: #fff8ed;
+  --sidebar-foreground: #3b0718;
+  --sidebar-primary: #570d22;
+  --sidebar-primary-foreground: #fff8ed;
+  --sidebar-accent: #e8d5b7;
+  --sidebar-accent-foreground: #3b0718;
+  --sidebar-border: #d8c39e;
+  --sidebar-ring: #c6a36b;
+  --maroon: #570d22;
+  --burgundy: #3b0718;
+  --beige: #e8d5b7;
+  --gold: #c6a36b;
+  --ivory: #fff8ed;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-script: 'Great Vibes', cursive;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--ivory); }
+body { margin: 0; background: var(--ivory); color: var(--burgundy); font-family: var(--font-serif); }
+body.invitation-locked { overflow: hidden; }
+button, a { -webkit-tap-highlight-color: transparent; }
+a { color: inherit; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-offset: 5px; }
+
+.opening-screen {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 60px 20px;
+  background: var(--burgundy);
+  isolation: isolate;
+}
+.opening-screen::before, .opening-screen::after { content: ''; position: absolute; inset: 0; z-index: -2; transition: opacity .35s ease; }
+.opening-screen::before {
+  background-image: linear-gradient(130deg, rgba(40, 5, 18, .78), rgba(55, 8, 24, .54) 52%, rgba(33, 4, 14, .77)), url('/images/wedding-cover.png');
+  background-position: center 43%;
+  background-size: cover;
+  animation: cover-image-in 1.8s ease both;
+}
+.opening-screen::after { z-index: -1; background: radial-gradient(ellipse at center, transparent 15%, rgba(32, 3, 13, .35) 100%); }
+.opening-screen-opening { background: transparent; }
+.opening-screen-opening::before { animation: none; opacity: 0; }
+.opening-screen-opening::after, .opening-screen-opening .opening-grain, .opening-screen-opening .opening-bottom-note, .opening-screen-opening .rose-petals { opacity: 0; }
+.opening-grain { position: absolute; z-index: -1; inset: 0; pointer-events: none; opacity: .12; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E"); }
+.opening-bottom-note { position: absolute; color: var(--ivory); font-family: Arial, sans-serif; font-size: 9px; letter-spacing: .26em; text-transform: uppercase; text-align: center; opacity: .76; bottom: 27px; display: flex; align-items: center; gap: 12px; }
+.opening-bottom-note span { width: 28px; height: 1px; background: var(--gold); }
+.invitation-cover {
+  position: relative;
+  width: min(100%, 475px);
+  min-height: 610px;
+  border: 1px solid rgba(198, 163, 107, .88);
+  background: linear-gradient(145deg, rgba(87, 13, 34, .98), rgba(59, 7, 24, .98));
+  color: var(--ivory);
+  text-align: center;
+  box-shadow: 0 26px 90px rgba(25, 3, 11, .42), inset 0 0 60px rgba(198, 163, 107, .035);
+  animation: card-arrive 1.25s cubic-bezier(.2,.72,.25,1) both;
+}
+.cover-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: inherit;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px clamp(25px, 7vw, 65px) 48px;
+  transition: opacity .2s ease;
+}
+.invitation-cover-opening .cover-content { opacity: 0; }
+.cover-doors { position: absolute; z-index: 3; inset: 0; visibility: hidden; opacity: 0; pointer-events: none; }
+.invitation-cover-opening .cover-doors { visibility: visible; opacity: 1; }
+.cover-door-left, .cover-door-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  border-top: 1px solid rgba(198, 163, 107, .9);
+  border-bottom: 1px solid rgba(198, 163, 107, .9);
+  background: linear-gradient(135deg, #650f29, #3b0718 76%);
+  transform: translateX(0);
+  box-shadow: inset 0 0 34px rgba(198, 163, 107, .08);
+}
+.cover-door-left { left: 0; border-left: 1px solid rgba(198, 163, 107, .9); }
+.cover-door-right { right: 0; border-right: 1px solid rgba(198, 163, 107, .9); }
+.invitation-cover-opening .cover-door-left { animation: cover-door-left-open .95s cubic-bezier(.42, 0, .58, 1) both; }
+.invitation-cover-opening .cover-door-right { animation: cover-door-right-open .95s cubic-bezier(.42, 0, .58, 1) both; }
+.invitation-cover::before, .invitation-cover::after { content: ''; position: absolute; width: 45px; height: 45px; border-color: rgba(198, 163, 107, .8); border-style: solid; pointer-events: none; }
+.invitation-cover::before { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+.invitation-cover::after { right: 10px; bottom: 10px; border-width: 0 1px 1px 0; }
+.cover-inner-border { position: absolute; inset: 8px; border: 1px solid rgba(198, 163, 107, .4); pointer-events: none; }
+.cover-corner { position: absolute; color: var(--gold); font-size: 30px; line-height: 1; }
+.cover-corner-top-left { top: 17px; left: 20px; transform: rotate(-45deg); }
+.cover-corner-top-right { top: 17px; right: 20px; transform: scaleX(-1) rotate(-45deg); }
+.cover-corner-bottom-left { bottom: 17px; left: 20px; transform: scaleY(-1) rotate(-45deg); }
+.cover-corner-bottom-right { bottom: 17px; right: 20px; transform: scale(-1) rotate(-45deg); }
+.cover-overline { margin: 0 0 28px; color: var(--beige); font-size: 14px; font-style: italic; letter-spacing: .03em; }
+.cover-mark { display: flex; align-items: baseline; gap: 11px; color: var(--gold); font-family: var(--font-script); font-size: 40px; line-height: 1; }
+.cover-mark i { font-family: var(--font-serif); font-size: 16px; font-style: italic; }
+.cover-invitation-label { margin: 21px 0 0; color: var(--beige); font-family: Arial, sans-serif; font-size: 9px; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; }
+.floral-divider { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 23px 0; color: var(--gold); }
+.floral-divider span { display: block; width: 42px; height: 1px; background: currentColor; opacity: .72; }
+.floral-divider svg { width: 13px; height: 13px; stroke-width: 1.1; }
+.floral-divider-light { color: var(--gold); }
+.cover-intro { max-width: 290px; margin: 0; color: var(--beige); font-size: 16px; line-height: 1.55; font-style: italic; }
+.cover-names { display: flex; flex-direction: column; align-items: center; margin: 25px 0 0; color: var(--ivory); font-family: var(--font-script); font-size: clamp(35px, 8vw, 47px); font-weight: 400; line-height: 1; }
+.cover-full-name { white-space: nowrap; }
+.cover-names .cover-ampersand { display: block; padding: 0; color: var(--gold); font-family: var(--font-serif); font-size: .55em; font-style: italic; line-height: 1; }
+.open-invitation-button { display: flex; align-items: center; justify-content: center; gap: 13px; min-width: 230px; min-height: 54px; margin-top: 32px; padding: 0 20px; border: 1px solid var(--gold); background: var(--beige); color: var(--burgundy); font-family: var(--font-script); font-size: clamp(24px, 2.8vw, 27px); font-weight: 400; letter-spacing: 0; text-transform: none; cursor: pointer; transition: background .25s ease, color .25s ease, box-shadow .25s ease, transform .25s ease; }
+.open-invitation-button span { line-height: 1; }
+.open-invitation-button svg { width: 15px; height: 15px; stroke-width: 1.4; transition: transform .25s ease; }
+.open-invitation-button:hover:not(:disabled) { transform: translateY(-2px); background: var(--ivory); box-shadow: 0 0 24px rgba(198, 163, 107, .26); }
+.open-invitation-button:hover:not(:disabled) svg { transform: translateY(3px); }
+.open-invitation-button:disabled { cursor: wait; }
+.invitation-cover-opening { background: transparent; border-color: transparent; box-shadow: none; animation: card-frame-exit .4s .55s cubic-bezier(.4, 0, .2, 1) both; }
+.invitation-cover-opening::before, .invitation-cover-opening::after { opacity: 0; }
+.rose-petals { position: absolute; z-index: 4; inset: 0; overflow: hidden; pointer-events: none; }
+.rose-petal {
+  position: absolute;
+  top: -24px;
+  left: var(--petal-left);
+  width: var(--petal-size);
+  height: calc(var(--petal-size) * .72);
+  border-radius: 100% 0 100% 0;
+  background: linear-gradient(135deg, rgba(255, 218, 211, .9), rgba(190, 91, 104, .7));
+  box-shadow: 0 1px 5px rgba(87, 13, 34, .15);
+  opacity: .68;
+  transform: rotate(var(--petal-rotate));
+  animation: rose-petal-fall var(--petal-duration) linear var(--petal-delay) infinite;
+}
+@keyframes rose-petal-fall {
+  0% { transform: translate3d(0, -3vh, 0) rotate(var(--petal-rotate)); }
+  50% { transform: translate3d(var(--petal-drift), 52vh, 0) rotate(calc(var(--petal-rotate) + 210deg)); }
+  100% { transform: translate3d(var(--petal-drift), 108vh, 0) rotate(calc(var(--petal-rotate) + 420deg)); }
+}
+@keyframes card-arrive { from { opacity: 0; transform: translateY(22px) scale(.975); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes cover-image-in { from { transform: scale(1.045); opacity: .65; } to { transform: scale(1); opacity: 1; } }
+@keyframes cover-door-left-open { to { transform: translateX(-100%); opacity: 0; } }
+@keyframes cover-door-right-open { to { transform: translateX(100%); opacity: 0; } }
+@keyframes card-frame-exit { to { opacity: 0; transform: scale(1.01); } }
+@keyframes invitation-page-arrive { from { opacity: 0; transform: translateY(24px) scale(1.04); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+.invitation-page { min-height: 100vh; overflow: hidden; background: var(--ivory); }
+.invitation-page-arriving { animation: invitation-page-arrive .95s cubic-bezier(.2, .65, .2, 1) both; }
+.welcome-section { position: relative; display: flex; min-height: min(760px, 100svh); align-items: center; justify-content: center; overflow: hidden; padding: 100px 28px; isolation: isolate; background: var(--burgundy); }
+.welcome-section::before { position: absolute; z-index: -1; inset: 0; background: linear-gradient(rgba(45, 5, 19, .46), rgba(45, 5, 19, .46)), url('/images/wedding-cover.png') center 42% / cover; content: ''; }
+.welcome-copy .eyebrow { color: var(--beige); }
+.welcome-copy { position: relative; z-index: 1; max-width: 760px; text-align: center; }
+.eyebrow { display: flex; align-items: center; justify-content: center; gap: 9px; margin: 0 0 22px; color: #8c704d; font-family: Arial, sans-serif; font-size: 9px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; }
+.eyebrow svg { width: 14px; height: 14px; stroke-width: 1.3; }
+.welcome-copy h1, .venue-copy h2 { margin: 0; color: var(--maroon); font-size: clamp(43px, 6vw, 78px); font-weight: 400; line-height: .99; letter-spacing: -.035em; }
+.welcome-copy h1 { color: var(--ivory); text-shadow: 0 2px 18px rgba(31, 4, 14, .38); }
+.welcome-copy h1 em, .venue-copy h2 em { color: #9b7650; font-family: var(--font-script); font-size: 1.1em; font-weight: 400; letter-spacing: 0; }
+.welcome-copy h1 em { color: var(--gold); }
+.welcome-copy .floral-divider { justify-content: center; margin: 30px auto 26px; }
+.welcome-message { max-width: 620px; margin: 0 auto; color: rgba(255, 248, 237, .94); font-size: 19px; line-height: 1.65; text-shadow: 0 1px 10px rgba(31, 4, 14, .35); }
+.welcome-message-secondary { margin-top: 13px; color: var(--beige); font-size: 17px; }
+.text-link { display: inline-flex; align-items: center; gap: 11px; margin-top: 30px; color: var(--ivory); font-family: Arial, sans-serif; font-size: 9px; letter-spacing: .16em; text-decoration: none; text-transform: uppercase;}
+.text-link svg { width: 14px; height: 14px; transition: transform .2s ease; }
+.text-link:hover svg { transform: translateY(3px); }
+.welcome-section .rose-petals { z-index: 2; opacity: .58; }
+
+.couple-date-section { display: grid; grid-template-columns: .9fr 1fr; align-items: center; gap: clamp(42px, 7vw, 100px); min-height: 720px; padding: 88px clamp(30px, 10vw, 150px); background: linear-gradient(135deg, #fff8ed, #f1e4d2); color: var(--maroon); }
+.couple-intro { max-width: 470px; justify-self: center; text-align: center; }
+.couple-date-section .eyebrow { margin-bottom: 20px; color: var(--maroon); }
+.couple-names { display: flex; flex-direction: column; align-items: center; color: var(--maroon); font-family: var(--font-script); font-size: clamp(40px, 5.8vw, 64px); line-height: .9; }
+.couple-names span { white-space: nowrap; }
+.couple-names i { margin: 6px 0; color: var(--maroon); font-family: var(--font-serif); font-size: 26px; font-weight: 400; }
+.couple-date-section .floral-divider { margin: 25px auto 18px; }
+.couple-verse { margin: 3px auto 0; color: var(--maroon); font-size: 17px; font-style: italic; line-height: 1.5; }
+.event-badge { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid rgba(87, 13, 34, .24); background: transparent; color: var(--maroon); font-family: Arial, sans-serif; font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.event-badge { margin-top: 25px; padding: 10px 16px; }
+.couple-calendar-column { width: min(100%, 450px); justify-self: center; padding: 0; background: transparent; text-align: center; }
+.calendar-card { width: min(100%, 370px); margin: 0 auto; padding: 22px 24px 20px; border: 1px solid rgba(87, 13, 34, .18); background: #fff8ed; box-shadow: 0 12px 32px rgba(59, 7, 24, .06); }
+.couple-calendar-column.is-visible .calendar-card { animation: calendar-arrive .9s .16s both; }
+@keyframes calendar-arrive { from { opacity: .35; transform: translateY(14px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.calendar-heading { display: flex; align-items: center; justify-content: space-between; padding-bottom: 17px; border-bottom: 1px solid rgba(87, 13, 34, .16); }
+.calendar-date { display: flex; min-height: 77px; flex-direction: column; justify-content: center; }
+.calendar-date-revealed { animation: calendar-date-reveal .7s cubic-bezier(.2, .65, .2, 1) both; }
+@keyframes calendar-date-reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.calendar-heading h4 { margin: 0; color: var(--maroon); font-family: var(--font-script); font-size: clamp(42px, 5.4vw, 52px); font-weight: 400; line-height: 1; white-space: nowrap; }
+.calendar-heading p { margin: 7px 0 0; color: var(--maroon); font-family: Arial, sans-serif; font-size: 18px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; }
+.calendar-flourish { color: var(--maroon); font-size: 18px; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); justify-items: center; row-gap: 5px; padding-top: 11px; }
+.calendar-weekday, .calendar-day { display: grid; width: 34px; height: 34px; place-items: center; color: var(--maroon); font-size: 14px; }
+.calendar-weekday { color: var(--maroon); font-family: Arial, sans-serif; font-size: 8px; letter-spacing: .04em; }
+.calendar-day-empty { visibility: hidden; }
+.calendar-day-active { position: relative; z-index: 0; color: var(--maroon); font-weight: 600; }
+.calendar-day-active::before { position: absolute; z-index: -1; width: 31px; height: 31px; border-radius: 50%; background: rgba(198, 163, 107, .48); content: ''; }
+.calendar-day-selected::before { background: #c6a36b; box-shadow: 0 0 0 4px rgba(198, 163, 107, .18); }
+
+.venue-section { position: relative; display: flex; min-height: 620px; align-items: center; justify-content: center; overflow: hidden; padding: 90px 28px; isolation: isolate; background: var(--burgundy); color: var(--ivory); text-align: center; }
+.venue-section::before { position: absolute; z-index: -2; inset: 0; background: url('/images/wedding-details.png') center 48% / cover; content: ''; opacity: .26; }
+.venue-section::after { position: absolute; z-index: -1; inset: 0; background: rgba(45, 5, 19, .66); content: ''; }
+.venue-copy { position: relative; z-index: 1; max-width: 620px; }
+.venue-copy h2 { color: var(--ivory); font-size: clamp(46px, 6vw, 76px); }
+.venue-copy h2 em { color: var(--gold); }
+.venue-copy .eyebrow { color: var(--beige); }
+.venue-copy .floral-divider { justify-content: center; margin: 25px 0; }
+.venue-copy h3 { margin: 0; color: var(--beige); font-size: clamp(30px, 4vw, 38px); font-weight: 400; }
+.venue-copy > p:not(.eyebrow):not(.venue-date) { max-width: 430px; margin: 12px auto 0; color: rgba(255, 248, 237, .88); font-size: 17px; line-height: 1.55; }
+.location-button { display: inline-flex; min-height: 48px; align-items: center; gap: 12px; margin-top: 27px; padding: 0 20px; border: 1px solid var(--gold); background: var(--beige); color: var(--burgundy); font-family: Arial, sans-serif; font-size: 9px; letter-spacing: .16em; text-decoration: none; text-transform: uppercase; transition: transform .22s ease, background .22s ease, box-shadow .22s ease; }
+.location-button:hover { transform: translateY(-2px); background: var(--ivory); box-shadow: 0 9px 28px rgba(0, 0, 0, .16); }
+.location-button svg { width: 15px; height: 15px; stroke-width: 1.5; }
+.location-button svg:last-child { width: 12px; height: 12px; margin-left: 3px; }
+.venue-date { margin: 18px 0 0; color: var(--beige); font-family: Arial, sans-serif; font-size: 9px; letter-spacing: .13em; }
+.page-footer { display: flex; min-height: 200px; flex-direction: column; align-items: center; justify-content: center; padding: 35px 20px; background: var(--ivory); text-align: center; }
+.footer-mark { color: var(--maroon); font-family: var(--font-script); font-size: 34px; }
+.footer-mark span { padding: 0 5px; color: var(--gold); font-family: var(--font-serif); font-size: 19px; }
+.page-footer p { margin: 5px 0 9px; color: #59443a; font-size: 17px; font-style: italic; }
+.page-footer > span { color: #9b7650; font-family: Arial, sans-serif; font-size: 8px; letter-spacing: .19em; text-transform: uppercase; }
+.footer-name { white-space: nowrap; }
+[data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity .85s ease, transform .85s cubic-bezier(.2,.65,.2,1); }
+[data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 760px) {
+  .opening-screen { padding: 56px 17px; }
+  .opening-screen::before { background-position: 52% center; }
+  .opening-bottom-note { bottom: 19px; font-size: 8px; }
+  .invitation-cover { width: min(100%, 430px); min-height: min(610px, calc(100dvh - 125px)); }
+  .cover-content { padding: 44px 28px 36px; }
+  .cover-overline { max-width: 240px; margin-bottom: 20px; font-size: 13px; }
+  .cover-mark { font-size: 35px; }
+  .cover-invitation-label { margin-top: 17px; }
+  .cover-intro { font-size: 15px; }
+  .cover-names { margin-top: 16px; font-size: clamp(35px, 9.6vw, 42px); }
+  .open-invitation-button { margin-top: 24px; }
+  .welcome-section { min-height: 680px; padding: 76px 25px; }
+  .welcome-copy { max-width: 530px; }
+  .welcome-copy h1 { font-size: clamp(45px, 12vw, 67px); }
+  .welcome-message { font-size: 18px; }
+  .couple-date-section { grid-template-columns: 1fr; gap: 42px; min-height: 0; padding: 70px 24px; }
+  .couple-intro { max-width: 430px; }
+  .couple-names { font-size: clamp(37px, 11vw, 52px); }
+  .couple-verse { max-width: 300px; font-size: 15px; line-height: 1.45; }
+  .calendar-card { width: min(100%, 365px); padding-right: 17px; padding-left: 17px; }
+  .calendar-weekday, .calendar-day { width: 35px; height: 35px; }
+  .venue-section { min-height: 570px; padding: 69px 28px 76px; }
+  .venue-copy h2 { font-size: clamp(49px, 13vw, 70px); }
+  .page-footer { min-height: 175px; }
+}
+
+@media (max-width: 380px) {
+  .opening-screen { padding-right: 12px; padding-left: 12px; }
+  .cover-content { padding-right: 20px; padding-left: 20px; }
+  .cover-names { font-size: clamp(32px, 9vw, 35px); }
+  .couple-names { font-size: 36px; }
+  .calendar-card { padding-right: 10px; padding-left: 10px; }
+  .calendar-weekday, .calendar-day { width: 32px; height: 32px; }
+}
+
+@media (max-height: 680px) {
+  .opening-screen { padding: 18px 14px; }
+  .opening-bottom-note { display: none; }
+  .invitation-cover { width: min(100%, 390px); min-height: min(610px, calc(100svh - 72px)); }
+  .cover-content { padding: 20px 26px 18px; }
+  .cover-overline { margin-bottom: 12px; font-size: 12px; }
+  .cover-mark { font-size: 32px; }
+  .cover-invitation-label { margin-top: 12px; }
+  .cover-content .floral-divider { margin: 12px 0; }
+  .cover-intro { font-size: 14px; }
+  .cover-names { margin-top: 11px; font-size: clamp(30px, 3.8vw, 35px); }
+  .open-invitation-button { min-height: 42px; margin-top: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  [data-reveal] { opacity: 1; transform: none; }
+  .rose-petals { display: none; }
+  .invitation-cover-opening, .invitation-cover-opening .cover-door-left, .invitation-cover-opening .cover-door-right { animation-delay: 0s !important; }
+}
